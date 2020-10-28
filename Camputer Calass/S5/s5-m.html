@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="cnv" width="400" height="400" style="border: 1px solid black"></canvas>
+    <script>
+      let i,x,y,yo=0;
+      let t = cnv.getContext("2d");
+      t.translate(200,200);
+      t.font = "10px Arial";
+      DrwLn(-200,0,200,0,"red");
+      for (i = -200; i < 200; i+=20) {
+        t.fillText(i,-10,i);
+      }
+      t.rotate(-Math.PI/2);
+      DrwLn(-200,0,200,0,"red");
+      for (i = -200; i < 200; i+=20) {
+        if (i!=0) {
+          t.fillText(i,-10,i);
+        }
+      }
+      t.rotate(Math.PI/2);
+      for (x = -200; x < 200; x+=1) {
+        // y=x+20;
+        y=0.000005*x**5 +5e-5*x**4-1e-2*x**3+3e0*x-10e0;
+        // y= Math.sqrt(100*x);
+        DrwLn(x-1,yo,x,y,"blue");
+        yo=y;
+      }
+      function DrwLn(x1,y1,x2,y2,col){
+        t.beginPath();
+        t.strokeStyle=col;
+        t.moveTo(x1,-y1);
+        t.lineTo(x2,-y2);
+        t.stroke();
+      }
+
+    </script>
+  </body>
+</html>
