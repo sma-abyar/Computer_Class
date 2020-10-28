@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas onmousedown="omd(event)" onmousemove="omm(event);" width="400" height="400" id=cnv style="background: #ffffff; border:1px solid black"></canvas><br>
+<input id=bo type="color" onchange="cnv.style.background=bo.value">
+<button onclick="clear();"> clear </button>
+    <input id=co type="color" onchange="c=co.value" onclick="c=co.value">
+    <button onclick="c='red';">Red</button>
+    <button onclick="c='blue';">Blue</button>
+    <button onclick="c='green';">Green</button><br>
+    <button onclick="way=1;"> 1 way </button>
+    <button onclick="way=2;"> Hor 2 way</button>
+    <button onclick="way=3;"> Ver 2 way</button>
+    <button onclick="way=4;"> 4 way </button>
+    LineWidth:<input type="number" id=wdt style="width:50px;"><br>
+    <button onclick="cnv.style.cursor = 'crosshair';epi=1;"> Epi </button>
+    r:<input type="numbes" id=repi style="width:40px;" value=20>
+    s:<input type="numbes" id=sepi style="width:40px;" value=4>
+    u:<input type="numbes" id=uepi style="width:40px;" value=3>
+    m:<input type="numbes" id=mepi style="width:40px;" value=61>
+    n:<input type="numbes" id=nepi style="width:40px;" value=-50>
+<script>
+    let epi =0;
+    let way =1;
+    let c ="black";
+    let t = cnv.getContext("2d");
+    let xghably=0;
+    let yghably=0;
+
+    function omd(e){
+        let a = 0,x,y, r = repi.value, s= sepi.value, u= uepi.value, m= mepi.value, n= nepi.value;
+        let x0= e.clientX, y0= e.clientY;
+        if (epi==1){
+            cnv.style.cursor= 'auto';
+
+            for (a=0;a<300;a=a+0.01){
+                t.beginPath();
+                t.strokeStyle = c;
+                t.strokeStyle = 'hsl(' + y + ',100%,50%)';
+                t.lineCap = "round";
+                t.lineWidth = wdt.value;
+                x= x0+ r*Math.cos(a) + s*Math.cos(n*a) + u*Math.cos(m*a);
+                y= y0+ r*Math.sin(a) + s*Math.sin(n*a) + u*Math.sin(m*a);
+                t.moveTo(x,y);
+                t.lineTo(x+1,y+1);
+                t.stroke();
+            }
+            epi = 0;
+        }
+    }
+    function omm(e){
+        let x=e.clientX-8;
+        let y=e.clientY-8;
+        if(e.buttons === 1){
+            t.beginPath();
+            t.strokeStyle = c;
+            t.lineWidth = wdt.value;
+            t.lineCap = "round";
+            t.moveTo(xghably,yghably); t.lineTo(x,y);
+    if(way == 2 || way == 4){t.moveTo(400-xghably,yghably); t.lineTo(400-x,y);}
+    if(way == 3 || way == 4){t.moveTo(xghably,400-yghably); t.lineTo(x,400-y);}
+    if(way == 4){t.moveTo(400-xghably,400-yghably); t.lineTo(400-x,400-y);}
+    t.stroke();
+    }
+    xghably=x
+    yghably=y
+    }
+    function clear(){ t.clearRect(0,0,400,400); }
+</script>
+</body>
+
+
+
+
+
+
+
+
+
