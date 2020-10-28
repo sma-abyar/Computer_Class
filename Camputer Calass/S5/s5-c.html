@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="cnv" width="600" height="600"></canvas>
+    <script>
+      let t = cnv.getContext("2d")
+      t.font="50px Arial";
+      t.translate(200,200);
+      setInterval(Timer,10);
+
+      function Timer() {
+        t.clearRect(-200,-200,600,600);
+        let i,d = new Date();
+        Aghrabeh("blue",-0.2,0.5,(d.getHours()+d.getMinutes()/60)*Math.PI/6,15);
+        Aghrabeh("green",-0.2,0.5,(d.getMinutes()+d.getSeconds()/60)*Math.PI/6,10);
+        Aghrabeh("purple",-0.2,0.5,(d.getSeconds()+d.getMilliseconds()*0.001)*Math.PI/30,5);
+        for (i=0;i<60;i++){
+          Aghrabeh("black", 1, 1.1, i*Math.PI/30,8);
+          if (i%5 == 0) {
+              Aghrabeh("red",0.95,1.2,i*Math.PI/30,8);
+          }
+        }
+        t.lineWidth = 2;
+        t.fillStyle = "white";
+        t.fillText(d.getHours()+":"+d.getMinutes()+":"+d.getSeconds(),-90,250);
+        t.strokeText(d.getHours()+":"+d.getMinutes()+":"+d.getSeconds(),-90,250);
+      }
+      function Aghrabeh(col,r1,r2,a,w) {
+        let x,y;
+        y = -Math.cos(a)*150;
+        x = Math.sin(a)*150;
+        t.beginPath();
+        t.lineWidth=w;
+        t.strokeStyle=col;
+        t.lineCap="round";
+        t.moveTo(r1*x,r1*y);
+        t.lineTo(r2*x,r2*y);
+        t.stroke();
+      }
+    </script>
+  </body>
+</html>
