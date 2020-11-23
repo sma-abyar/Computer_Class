@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="cnv" width="400" height="400" style="border:1px solid black"></canvas>
+    <script>
+      let i,rold=0;
+      let t = cnv.getContext("2d");
+      let px = rnd(400);
+      let py = rnd(400);
+      setInterval(timer,10);
+
+      function timer(){
+        for(i=0;i<100;i++){
+          //do
+          r=rnd(8);
+          //while (r==rold)
+          rold=r;
+          if(r==0){px=(px+0*2)/3;py=(py+0*2)/3;}
+          if(r==1){px=(px+200*2)/3;py=(py+0*2)/3;}
+          if(r==2){px=(px+400*2)/3;py=(py+0*2)/3;}
+          if(r==3){px=(px+0*2)/3;py=(py+200*2)/3;}
+          if(r==4){px=(px+400*2)/3;py=(py+200*2)/3;}
+          if(r==5){px=(px+0*2)/3;py=(py+400*2)/3;}
+          if(r==6){px=(px+200*2)/3;py=(py+400*2)/3;}
+          if(r==7){px=(px+400*2)/3;py=(py+400*2)/3;}
+          pixel(px,py,r);
+        }
+      }
+      function rnd(n){
+        return Math.floor(Math.random()*n)
+      }
+      function pixel(x,y,r){
+        let color;
+        t.beginPath();
+        if(r==0) {color="blue";}
+        if(r==1) {color="red";}
+        if(r==2) {color="brown";}
+        if(r==3) {color="violet";}
+        if(r==4) {color="green";}
+        if(r==5) {color="magenta";}
+        if(r==6) {color="gold";}
+        if(r==7) {color="orange";}
+        t.strokeStyle=color;
+        t.moveTo(x,y);
+        t.lineTo(x+1,y);
+        t.stroke();
+      }
+    </script>
+  </body>
+</html>
