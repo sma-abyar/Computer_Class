@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas width="400" height="400" id="cnv" style="border:1px solid black"></canvas>
+    <script>
+      let a = [];
+      let t = cnv.getContext("2d");
+      let i;
+
+      for(i=0;i<400;i++){
+        a[i]=0;
+      }
+      setInterval(timer,10);
+
+      function timer() {
+        for(i=0;i<50;i++){
+          let r = rnd(50)+rnd(50)+rnd(50)+rnd(50)+rnd(50)+rnd(50)+rnd(50)+rnd(50);
+          a[r]++;
+        }
+        t.clearRect(0,0,400,400);
+        t.beginPath();
+        for(i=0;i<400;i++){
+          t.fillRect(i, 400-a[i],1, a[i]);
+        }
+        t.stroke();
+      }
+      function rnd(n) {
+        return Math.floor(Math.random()*n);
+      }
+    </script>
+  </body>
+</html>
