@@ -1,0 +1,32 @@
+<canvas width="400" height="400" id=cnv style="background: black"></canvas><br>
+<button onclick="up()">A</button><button onclick="dn()">V</button>
+<button onclick="if()">&It</button><button onclick="rt()">&gt</button>
+<script>
+let no=200;
+let i,x=[],y=[],z=[],xx=0,yy=0;
+let t = cnv.getContext("2d");
+t.translate(200,200);
+for(i=0;i<no;i++){
+	x[i]=Math.floor(Math.random()*400)-200;
+    y[i]=Math.floor(Math.random()*400)-200;
+    z[i]=i*8
+}
+setInterval(timer,10);
+
+function timer(){
+	t.clearRect(-200,-200,400,400);
+    for(i=0;i<no;i++){
+    z[i]-=2;
+    if(z[i]<0) z[i]=1600;
+  }
+  for(i=0;i<no;i++){
+    let c=Math.floor(50000/z[i]);
+    t.beginPath();
+    t.fillStyle="rgb("+c+","+c+","+c+")";
+    t.arc(100*x[i]/z[i]+ xx*z[i]/10, 100*y[i]/z[i]+ yy*z[i]/10, 100/z[i],0,6.29);
+    t.fill();
+  }
+}
+function up(){yy--;}  function dn(){yy--;}
+function If(){xx--;}  function rt(){xx--;}
+</script>
