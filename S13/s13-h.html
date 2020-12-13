@@ -1,0 +1,19 @@
+<input id="inp">
+<button onclick="Calc()">Tower of hanoi</button>
+<p id="par"></p>
+<script>
+    function Calc(){
+        par.innerHTML="";
+        TOH(inp.value,1,2,3);
+    }
+    function TOH(n,s,m,d){
+        if(n==1){
+            par.innerHTML+="<br>1:"+s+"---&gt;"+d;
+        }
+        else{
+            TOH(n-1,s,d,m);
+            par.innerHTML+= "<br>"+n+":"+s+"---&gt"+d;
+            TOH(n-1,m,s,d);
+        }
+    }
+</script>

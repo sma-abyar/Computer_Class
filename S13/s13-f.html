@@ -1,0 +1,23 @@
+<input type="number" id="inp">
+<button onclick="calc()">calc</button>
+<p id="par"></p>
+<script>
+    let a = 1;
+    function calc(){
+        par.innerHTML = factoriel(inp.value);
+    }
+    function factoriel(n) {
+        if (n < 0) {
+            alert("It's wrong!");
+            return "### Error ###";
+        }
+        else {
+            if (n == 0) {
+                return 1;
+            }
+            else {
+                return n * factoriel(n - 1);
+            }
+        }
+    }
+</script>
