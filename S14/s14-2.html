@@ -1,0 +1,30 @@
+<canvas onmousemove="mmv(event)" width="400" height="400" id="cnv" style="border: 1px soliid black;"></canvas>
+<script>
+    let t = cnv.getContext("2d");
+
+    function mmv(e){
+        t.strokeStyle="red";
+        t.clearRect(0,0,400,400);
+        DrawCircle(200,200,70,6,e.clientX/300,e.clientY/300,0);
+    }
+    function DrawCircle(x,y,r,n,m,mm,d){
+        t.beginPath();
+        t.lineWidth=r/mm;
+        t.arc(x,y,r*m,0,6.29);
+        t.stroke();
+        if(n>1){
+            if (d!=1){
+                DrawCircle(x+3*r/2,y,r/2,n-1,m,mm,1);
+            }
+            if (d!=2){
+                DrawCircle(x-3*r/2,y,r/2,n-1,m,mm,2);
+            }
+            if (d!=3){
+                DrawCircle(x,y+3*r/2,r/2,n-1,m,mm,3);
+            }
+            if (d!=4){
+                DrawCircle(x,y-3*r/2,r/2,n-1,m,mm,4);
+            }
+        }
+    }
+    </script>
