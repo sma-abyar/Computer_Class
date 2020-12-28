@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <input id="inp">
+    <button onclick="calc()"> Calculate</button>
+    <p id="par"></p>
+    <p id="prog">
+    </p>
+    <script src="./jsbignumber.js"></script>
+    <script>
+        let n, a;
+        function calc() {
+            a = 2;
+            par.innerHTML = "";
+            n = inp.value;
+            while (n > 1) {
+                m = n%a;
+                if (m == 0) {
+                    par.innerHTML += a;
+                    n = jsbignumber.div(n,a);
+                    if (n > 1) par.innerHTML += ",";
+                } else {
+                    a = jsbignumber.add(a,1);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
