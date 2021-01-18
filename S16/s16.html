@@ -1,0 +1,130 @@
+<input id=inp onchange="Read()">
+<button onclick="Read()">بخوان</button>
+<br><span id=ans></span>
+<script>
+    function Read() {
+        ans.innerHTML = fwn(inp.value);
+    }
+    function fwn(n) {
+        let retval = "";
+        let d, a, b, c, e;
+        if (n < 0) {
+            retval = " منفی ";
+            n = -n;
+        }
+        if (n == 0) return "صفر";
+        c = Math.floor(n) % 1000;
+        b = Math.floor(n / 1000) % 1000
+        a = Math.floor(n / 1000000) % 1000;
+        d = Math.floor(n / 1000000000) % 1000;
+        e = Math.floor(n / 1000000000000) % 1000;
+        if (e > 0) {
+            retval += FSeraghami(e) + " هزار";
+            if (d > 0 || a > 0 || b > 0 || c > 0) retval += " و ";
+        }
+        if (d > 0) {
+            retval += FSeraghami(d) + " میلیارد";
+            if (a > 0 || b > 0 || c > 0) retval += " و ";
+        }
+        if (a > 0) {
+            retval += FSeraghami(a) + " میلیون";
+            if (b > 0 || c > 0) retval += " و ";
+        }
+        if (b > 0) {
+            retval += FSeraghami(b) + " هزار";
+            if (c > 0)
+                retval += " و ";
+        }
+        if (c > 0)
+            retval += FSeraghami(c);
+        return retval
+    }
+    function FSeraghami(n) {
+        let retval = "";
+        let a, b, c;
+
+        c = Math.floor(n) % 10;
+        b = Math.floor(n / 10) % 10;
+        a = Math.floor(n / 100) % 10;
+
+        if (a > 0) {
+            retval += FSadgan(a);
+            if (b > 0 || c > 0) retval += " و ";
+        }
+        if (b > 0 || c > 0) {
+            switch (b) {
+                case 0: retval += FYekan(c); break;
+                case 1: retval += FYazTaNoz(c); break;
+                case 2: case 3: case 4: case 5:
+                case 6: case 7: case 8: case 9:
+                    retval += FDahgan(b)
+                        + ((c > 0) ? (" و " + FYekan(c)) : "");
+                    break;
+                default: retval = "error";
+            }
+        }
+
+        return retval;
+    }
+
+    function FYekan(n) {
+        let retval = " ";
+        switch (n * 1) {
+            case 1: retval += "یک"; break;
+            case 2: retval += "دو"; break;
+            case 3: retval += "سه"; break;
+            case 4: retval += "چهار"; break;
+            case 5: retval += "پنج"; break;
+            case 6: retval += "شش"; break;
+            case 7: retval += "هفت"; break;
+            case 8: retval += "هشت"; break;
+            case 9: retval += "نه"; break;
+        }
+        return retval;
+    }
+    function FYazTaNoz(n) {
+        let retval = "";
+        switch (n * 1) {
+            case 1: retval += "یاز"; break;
+            case 2: retval += "دواز"; break;
+            case 3: retval += "سیز"; break;
+            case 4: retval += "چهار"; break;
+            case 5: retval += "پانز"; break;
+            case 6: retval += "شانز"; break;
+            case 7: retval += "هف"; break;
+            case 8: retval += "هج"; break;
+            case 9: retval += "نوز"; break;
+        }
+        return retval + "ده";
+    }
+    function FDahgan(n) {
+        let retval = "";
+        switch (n * 1) {
+            //case 1: retval+=""; break;
+            case 2: retval += "بیست"; break;
+            case 3: retval += "سی"; break;
+            case 4: retval += "چهل"; break;
+            case 5: retval += "پنجاه"; break;
+            case 6: retval += "شصت"; break;
+            case 7: retval += "هفتاد"; break;
+            case 8: retval += "هشتاد"; break;
+            case 9: retval += "نود"; break;
+        }
+        return retval;
+    }
+    function FSadgan(n) {
+        let retval = " ";
+        switch (n * 1) {
+            case 1: retval += "یکصد"; break;
+            case 2: retval += "دویست"; break;
+            case 3: retval += "سیصد"; break;
+            case 4: retval += "چهارصد"; break;
+            case 5: retval += "پانصد"; break;
+            case 6: retval += "ششصد"; break;
+            case 7: retval += "هفتصد"; break;
+            case 8: retval += "هشتصد"; break;
+            case 9: retval += "نهصد"; break;
+        }
+        return retval;
+    }
+</script>
