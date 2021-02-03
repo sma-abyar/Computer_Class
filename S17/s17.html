@@ -1,0 +1,24 @@
+<h1>Test of being a triangle</h1>
+<h5>Please write your numbers:</h5>
+A:<input type="number" id=aa><br><br>
+B:<input type="number" id=bb><br><br>
+C:<input type="number" id=cc><br><br>
+<button onclick="mosallas()">Calc</button><br>
+<p id=result></p>
+
+<script>
+    function mosallas() {
+        let a = aa.value * 1;
+        let b = bb.value * 1;
+        let c = cc.value * 1;
+        if (a < (b + c) && b < (a + c) && c < (a + b)) {
+            result.innerHTML = "It's ok! You can do what want you do! ";
+            if (((a ** 2 + b ** 2) == (c ** 2)) || ((c ** 2 + b ** 2) == (a ** 2)) || ((a ** 2 + c ** 2) == (b ** 2))) {
+                result.innerHTML += "It's rectangular.";
+            }
+        }
+        else {
+            result.innerHTML = "Oh no! You can't make your triangle by these numbers! ;(    You can try again with deiffrent number. ";
+        }
+    }
+</script>
