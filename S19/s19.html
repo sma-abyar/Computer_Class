@@ -1,0 +1,24 @@
+<script src="https://mirzababaei.alavischool.ir/tryit/lib/test.js"></script>
+<img id="im" src="https://mirzababaei.alavischool.ir/tryit/pic/abr.jpg" width="0">
+<canvas id="cnv" width="400" height="200" style="border: 1px solid black;"></canvas>
+<button onclick="Start()">Start</button>
+<script>
+    let t=cnv.getContext("2d");
+    function Start(){
+        let x,y,i,ii,m;
+        t.drawImage(im,200,0,200,200);
+        let buf1 = t.getImageData(200,0,200,200);
+        let buf2 = t.getImageData(200,0,200,200);
+        for (y=0;y<200;y++){
+            for (x=0;x<200;x++){
+                i = 4*(x+Math.floor(y/Math.sin(x/63))*200);
+                ii = 4*(x+y*200);
+                buf2.data[ii+0]=buf1.data[i+0];
+                buf2.data[ii+1]=(buf1.data[i+1]>70)?70:buf1.data[i+1];
+                buf2.data[ii+2]=buf1.data[i+2];
+                buf2.data[ii+3]=255;
+            }
+        }
+        t.putImageData(buf2,0,0);
+    }
+</script>
