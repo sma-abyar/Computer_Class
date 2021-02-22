@@ -1,0 +1,88 @@
+<img width=0 id=tmt src="https://image.similarpng.com/very-thumbnail/2020/08/Red-tomato-on-transparent-background-PNG.png"> 
+<img width=0 id=snkhd src="">
+<canvas width="400" height="400" id=cnv style="border:lpx solid black"></canvas> 
+<script> 
+let Timer, Time=900; 
+let t = cnv.getContext("2d"); 
+let snkx=[10],snky=[10],dx=0,dy=0,bnsx=5,bnsy=5;
+
+Timer=setInterval(Step,Time);
+
+function Step(){ 
+  let x=(snkx[snkx.length-1]+20+dx)%20; 
+  let y=(snky[snky.length-1]+20+dy)%20; 
+  
+  if(dx!=0 || dy!=0) 
+    if(Snake(x,y)){ 
+      alert(snkx.length+" ooch !"); 
+      clearInterval(Timer);
+    }
+    
+
+  snkx.push(x); 
+  snky.push(y);
+  if(Snake(bnsx,bnsy)){ 
+    bnsx=Math.floor(Math.random()*20); 
+    bnsy=Math.floor(Math.random()*20); 
+    clearInterval(Timer); 
+    Time *= 0.8; 
+    Timer=setInterval(Step,Time); 
+  } else { 
+    snkx.shift(); 
+    snky.shift();
+  }
+  Draw();
+}
+onkeydown = function (e) {
+        dx = dy = 0;
+        if (e.keyCode == 37) dx = -1;
+        if (e.keyCode == 38) dy = -1;
+        if (e.keyCode == 39) dx = +1;
+        if (e.keyCode == 40) dy = +1;
+    }
+    function Snake(x, y) {
+        let i;
+
+        for (i = 0; i < snkx.length; i++)
+            if (x == snkx[i] && y == snky[i])
+                return 1;
+        return 0;
+    }
+    function SnakeG(x, y) {
+        let i;
+
+        for (i = 0; i < snkx.length; i++)
+            if (x == snkx[i] && y == snky[i])
+                return snkx.length - i;
+        return 0;
+        function SnakeHead(x, y) {
+            if (x == snkx[snkx.length - 1] && y == snky[snky.length - 1])
+                return 1; return 0;
+            function SnakeTail(x, y) {
+                if (x == snkx[0] && y == snky[0])
+                    return 1; return 0;
+                function Draw() {
+                    let i, j, f;
+                    t.clearRect(0, 0, 400, 400);
+                    for (i = 0; i < 20; i++)
+                        for (j = 0; j < 20; j++) {
+                            f = 0;
+                            if (Snake(i, j))
+                                t.fillStyle = "hs1(0,0%," + SnakeG(i, j) * 90 / snkx.length + "%)";
+                            else
+                                t.fillStyle = "green";
+                            if (SnakeHead(i, j)) {
+                                t.drawImage(snkhd, i * 20, j * 20, 20, 20);
+                                f = 1;
+                            }
+                            if (i == bnsx && j == bnsy) {
+                                t.drawlmage(tmt, i * 20, j * 20, 20, 20);
+                                f = 1;
+                            }
+                            if (f == 0)
+                                t.fillRect(i * 20 + 1, j * 20 + 1, 19, 19);
+                        }
+                }
+            }
+        }
+    }
