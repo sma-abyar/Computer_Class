@@ -1,0 +1,16 @@
+<canvas width=400 height=400 id=cnv style="border: 1px solid black"></canvas>
+<script>
+let t = cnv.getContext("2d");
+let fa = ["IranNastaliq", "Vazir", "Sahel"];
+
+setInterval(Timer, 100);
+
+function Timer() {
+	t.fillStyle = "hsl("+rnd(360)+",100%,50%)";
+    t.font = rnd(150)+"px "+fa[rnd(1)];
+    t.fillText("یا علی", rnd(400)-20, rnd(400));
+}
+function rnd(n) {
+	return Math.floor(Math.random()*n);
+}
+</script>

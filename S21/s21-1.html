@@ -1,0 +1,23 @@
+برنامه‌ی چشم بندی وحشت نکنید ما فکر شما را حدس می‌زنیم. یک عدد دورقمی انتخاب کنید و ارقام آن را با هم جمع کنید و از عدد اوّل کم کنید. جلوی عددی که شما پیدا می‌:نید این علامت قرار دارد.
+<span id="sp"></span>
+<p id="par"></p>
+<button onclick="wrt()">امتحان کنید</button>
+<script>
+    let r = rnd(45)+0x32D0;
+    let i;
+    sp.innerHTML=String.fromCharCode(r);
+    function wrt(){
+        par.innerHTML="";
+        for(i=1;i<100;i++){
+            if(i%9 == 0){
+                par.innerHTML +="["+i+":"+sp.innerHTML+"]";
+            }
+            else{
+                par.innerHTML+="["+i+":"+String.fromCharCode(rnd(45)+0x32d0)+"]";
+            }
+        }
+    }
+    function rnd(n){
+        return Math.floor(Math.random()*n);
+    }
+</script>
