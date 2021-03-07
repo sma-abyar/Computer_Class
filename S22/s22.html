@@ -1,0 +1,97 @@
+<canvas width="400" height="400" onmousemove="mmv(event)" id="cnv"></canvas>
+<br>
+<button onclick="clr()">Clear</button>
+<button onclick="stp()">One Step</button>
+<button onclick="torun()" id="ru">Run</button>
+<select id="spds">
+    <option value="10">10 ms</option>
+    <option value="100">100 ms</option>
+    <option value="500">500 ms</option>
+</select>
+<script>
+    let running = 0, ti;
+    let t = cnv.getContext("2d");
+    let i, s = [], c = [];
+    for (i = 0; i < 1600; i++) {
+        s[i] = 0;
+    }
+    function Timer() {
+        if (running == 1) {
+            stp();
+        }
+    }
+    function mmv(e) {
+        let x = Math.floor((e.clientX - 8) / 10);
+        let y = Math.floor((e.clientY - 8) / 10);
+        if (e.buttons == 1) {
+            s[x + y * 40] = 1;
+        }
+        if (e.buttons > 1) {
+            s[x + y * 40] = 0;
+        }
+        Draw();
+    }
+    function Draw() {
+        let i, j;
+        for (j = 0; j < 40; j++) {
+            for (i = 0; i < 40; i++) {
+                if (s[i + j * 40] == 1) {
+                    t.fillStyle = "black";
+                }
+                else {
+                    t.fillStyle = "white";
+                }
+                t.fillRect(i * 10, j * 10, 9, 9);
+            }
+        }
+    }
+    function clr() {
+        let i;
+        for (i = 0; i < 1600; i++) {
+            s[i] = 0;
+        }
+        Draw();
+    }
+    function S(i, j) {
+        i = (i + 40) % 40;
+        j = (j + 40) % 40;
+        return s[i + j * 40];
+    }
+    function Count(i, j) {
+        return S(i - 1, j - 1) + S(i, j - 1) + S(i + 1, j - 1) + S(i - 1, j) + S(i + 1, j) + S(i - 1, j + 1) + S(i, j + 1) + S(i + 1, j + 1);
+    }
+    function stp() {
+        let i, j;
+        for (j = 0; j < 40; j++) {
+            for (i = 0; i < 40; i++) {
+                c[i + j * 40] = Count(i, j);
+            }
+        }
+        for (i = 0; i < 1600; i++) {
+            if (s[i] == 1) {
+                if (c[i] != 2 && c[i] != 3) {
+                    s[i] = 0;
+                }
+            }
+            else {
+                if (s[i] == 0) {
+                    if (c[i] == 3) {
+                        s[i] = 1;
+                    }
+                }
+            }
+        }
+        Draw();
+    }
+    function torun() {
+        running = 1 - running;
+        if (running == 1) {
+            ru.innerHTML = "Stop";
+            ti = setInterval(Timer, spds.value);
+        }
+        else {
+            ru.innerHTML = "Run";
+            clearInterval(ti);
+        }
+    }
+</script>
