@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="https://mirzababaei.alavischool.ir/tryit/pic/ball.png" id=ball width="0">
+    <img src="https://mirzababaei.alavischool.ir/tryit/pic/racket.png" id=racket width="0">
+    <img src="https://mirzababaei.alavischool.ir/tryit/pic/images.jfif" id=table width="0">
+    <canvas onmousemove="mmt(event);" id=c width="1700" height="700"
+        style="border: 1px solid #d3d3d3; cursor: none;"></canvas>
+    <p id=par></p>
+</body>
+<script>
+    var t2d = c.getContext("2d");
+    var xrk = 0, yrk = 600, strk = 0;
+    var xball = 350, yball = 0;
+    var g = 9.8, t = 0, y0 = 0, v0x = 1, v0y = 100;
+    document.addEventListener("keypress", okd, false);
+    setInterval(mmr, 10);
+    function mmr() {
+        xball += v0x;
+        yball = - .5 * g * t * t + v0y * t + y0;
+        if (xball > c.width - 30 || xball < 30) {
+            v0x = -v0x
+        }
+        t += 0.05;
+        if (yball < 0) {
+            if (xball < xrk || xball > xrk + 130) {
+                par.innerHTML += " [" + strk + "] ooch!";
+                g = 9.8, t = 0, y0 = 0, v0x = 1, v0y = 100, strk = 0;
+                return;
+            }
+            else {
+                strk++;
+                v0x = Math.random() - 0.5;
+                v0y = Math.random() * 50 + 50;
+                t = 0;
+            }
+        }
+        drawscr();
+    }
+    function okd(event) {
+        switch (event.keyVode) {
+            case 65: case 97: xrk -= 30; break;
+            case 68: case 100: xrk += 30; break;
+        }
+        mmr();
+    }
+    function drawscr() {
+        t2d.drawImage(table, 0, 0, 1700, 700);
+        t2d.drawImage(racket, xrk - 50, yrk + 20, 200, 50);
+        t2d.translate(xball, 600 - yball);
+        t2d.rotate(t * v0x);
+        t2d.drawImage(ball, -30, -30, 60, 60);
+        t2d.rotate(-t * v0x);
+        t2d.translate(-xball, -600 + yball);
+    }
+    function mmt(event) {
+        xrk = event.clientX - 50;
+    }
+</script>
+
+
+</html>
