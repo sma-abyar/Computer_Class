@@ -1,0 +1,28 @@
+<canvas width="400" height="400" id="cnv"></canvas>
+<p id="par"></p>
+<script>
+    let i,j,t= cnv.getContext("2d"),r=0,x=0,y=0,xl=[],yl=[],rl=[];
+    let arm=20, angle= Math.PI/2,it=14;
+    let axiom="FX";
+    for(i=0;i<it;i++){
+        axiom=axiom.replace(/X/g,"x+yF+")
+        axiom=axiom.replace(/Y/g,"-Fx-y")
+        axiom=axiom.replace(/x/g,"X")
+        axiom=axiom.replace(/y/g,"Y")
+        par.innerHTML+="<br>"+axiom;
+    }
+    arm/=it;
+    for(i=0;i<axiom.length;i++){
+        t.beginPath();
+        t.setTransform(Math.cos(r),-Math.sin(r),Math.sin(r),Math.cos(r),x+100,y+100);
+        switch(axiom[i]){
+            case '0': t.moveTo(0,0);t.lineTo(0,-arm);break;
+            case 'F': t.moveTo(0,0);t.lineTo(0,-arm);x-=arm*Math.sin(r);y-=arm*Math.cos(r);break;
+            case '+': r+=angle; break;
+            case '-': r-=angle; break;
+            case '[': xl.push(x); yl.push(y); rl.push(r); break;
+            case ']': x=xl.pop(); y=yl.pop(); r=rl.pop();break;
+        }
+        t.stroke();
+    }
+</script>
